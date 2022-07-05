@@ -18,6 +18,13 @@ export function findItem(
     return Item.findOne(query, {}, options);
 }
 
+export function findItemByTag(
+    query: FilterQuery<ItemDocument>,
+    options: QueryOptions = { lean: true }
+) {
+    return Item.find(query, {}, options);
+}
+
 export function findAllItems(){
     return Item.find();
 }

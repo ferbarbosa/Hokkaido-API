@@ -8,6 +8,7 @@ export interface ItemDocument extends mongoose.Document {
   price: string;
   img: Array<any>;
   description: string;
+  tag: Array<any>;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,6 +27,7 @@ const ItemSchema = new mongoose.Schema(
     price: { type: String, default: true },
     img: {type: Array, default: true},
     description: { type: String, default: true },
+    tag: {type: Array, default: true},
   },
   { timestamps: true }
 );
