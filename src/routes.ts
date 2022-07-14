@@ -1,6 +1,7 @@
 import { application, Express, Request, Response } from "express";
 
 import { createItemHandler, updateItemHandler, getItemHandler, getAllItemsHandler, getItemByTagHandler } from "./controller/item.controller";
+import { createUserHandler, getUserHandler } from "./controller/user.controller";
 
 export default function(app: Express) {
     
@@ -21,5 +22,9 @@ export default function(app: Express) {
 
     // Get a item by tag
     app.get("/items/tag/:tag", getItemByTagHandler);
+
+    app.post("/adduser", createUserHandler);
+
+    app.get("/auth", getUserHandler);
 
 }
