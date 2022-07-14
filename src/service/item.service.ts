@@ -26,6 +26,7 @@ export function findItemByTag(
 }
 
 export function findAllItems(){
+   // const item =  findItemByTag({ "tag" : { $in : [tag]} });
     return Item.find();
 }
 

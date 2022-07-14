@@ -4,8 +4,6 @@ import { createItem, findItem, findAndUpdate, findAllItems, findItemByTag } from
 
 export async function createItemHandler(req: Request, res: Response){
     
-    // Cors acess
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     
     const body = req.body;
 
@@ -17,8 +15,6 @@ export async function createItemHandler(req: Request, res: Response){
 
 export async function updateItemHandler(req: Request, res: Response){
    
-    // Cors acess
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
    
     const itemId = get(req, "params.itemId");
     const update = req.body;
@@ -35,9 +31,6 @@ export async function updateItemHandler(req: Request, res: Response){
 
 export async function getItemHandler(req: Request, res: Response){
     
-    // Cors acess
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    
     const itemId = get(req, "params.itemId");
     const item = await findItem({ itemId });
 
@@ -47,9 +40,6 @@ export async function getItemHandler(req: Request, res: Response){
 }
 
 export async function getItemByTagHandler(req: Request, res: Response){
-    
-    // Cors acess
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     
     const tag = get(req, "params.tag");
     const item = await findItemByTag({ "tag" : { $in : [tag]} });
@@ -61,8 +51,11 @@ export async function getItemByTagHandler(req: Request, res: Response){
 
 export async function getAllItemsHandler(req: Request, res: Response){
 
-    // Cors acess
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    
+    //const sizes = req.query.sizes.split(",");
+    //console.log(sizes);
+    //Fazer validações
+
     
     const allItems = await findAllItems();
 
