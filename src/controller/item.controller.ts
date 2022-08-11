@@ -42,10 +42,18 @@ export async function getItemHandler(req: Request, res: Response){
 export async function getItemByTagHandler(req: Request, res: Response){
     let sort = get(req, "query.sort");
     let orderBy = get(req, "query.orderBy");
+    let size = get(req, "query.size");
+    if(!size) size = ['PP','P','M','G','GG','XG','XXG','XXXG','XXXXG'];
     if(!sort) sort = "createdAt";
     if(!orderBy) orderBy = "1";
     const tag = get(req, "params.tag");
-    const item = await findItemByTag({ "tag" : { $in : [tag]} }).sort({[sort]: orderBy});
+    const item = await findItemByTag(
+        { 
+            $and: [
+                {"tag" : { $in : [tag]}},
+                {"size" : { $in : [size]}}
+            ]
+        }).sort({[sort]: orderBy});
 
     if(!item) return res.sendStatus(404);
 
@@ -90,14 +98,15 @@ export async function getAllItemsHandlerWithFilter(req: Request, res: Response){
 
     let limit = get(req, "query.limit");
     if(!limit) limit = 10;
-    let tag = get(req, "query.tag");
+    let tag = get(req, "query.tag").split(",");
     if(!tag) tag = "";
     let sort = get(req, "query.sort");
     let orderBy = get(req, "query.orderBy");
     if(!sort) sort = "createdAt";
     if(!orderBy) orderBy = "1";
     
-    const allItems = await findItemByTag({"tag" : { $in : [tag]}}).sort({[sort]: orderBy}).limit(limit);
+    
+    const allItems = await findItemByTag({"tag" : { $all : tag}}).sort({[sort]: orderBy}).limit(limit);
 
     if(!allItems) return res.sendStatus(404);
 
