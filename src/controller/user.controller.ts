@@ -14,7 +14,11 @@ export async function createUserHandler(req: Request, res: Response){
 
 }
 
+
+
 export async function getUserHandler(req: Request, res: Response){
+
+    console.log(req.body);
 
     const pass = req.body.password;
     const email = req.body.email;

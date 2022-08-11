@@ -40,13 +40,27 @@ export async function getItemHandler(req: Request, res: Response){
 }
 
 export async function getItemByTagHandler(req: Request, res: Response){
-    
+    let sort = get(req, "query.sort");
+    let orderBy = get(req, "query.orderBy");
+    if(!sort) sort = "createdAt";
+    if(!orderBy) orderBy = "1";
     const tag = get(req, "params.tag");
-    const item = await findItemByTag({ "tag" : { $in : [tag]} });
+    const item = await findItemByTag({ "tag" : { $in : [tag]} }).sort({[sort]: orderBy});
 
     if(!item) return res.sendStatus(404);
 
     return res.send(item);    
+}
+
+export async function getPopularItems(req: Request, res: Response){
+    
+    let limit = get(req, "query.limit");
+    if(!limit) limit = 10;
+    const allItems = await findAllItems().sort({["orders"]: -1}).limit(limit);
+
+    if(!allItems) return res.sendStatus(404);
+
+    return res.send(allItems);
 }
 
 export async function getAllItemsHandler(req: Request, res: Response){
@@ -56,8 +70,34 @@ export async function getAllItemsHandler(req: Request, res: Response){
     //console.log(sizes);
     //Fazer validações
 
+    let limit = get(req, "query.limit");
+    if(!limit) limit = 10;
     
-    const allItems = await findAllItems();
+    const allItems = await findAllItems().sort({["orders"]: -1}).limit(limit);
+
+    if(!allItems) return res.sendStatus(404);
+
+    return res.send(allItems);
+
+}
+
+export async function getAllItemsHandlerWithFilter(req: Request, res: Response){
+
+    
+    //const sizes = req.query.sizes.split(",");
+    //console.log(sizes);
+    //Fazer validações
+
+    let limit = get(req, "query.limit");
+    if(!limit) limit = 10;
+    let tag = get(req, "query.tag");
+    if(!tag) tag = "";
+    let sort = get(req, "query.sort");
+    let orderBy = get(req, "query.orderBy");
+    if(!sort) sort = "createdAt";
+    if(!orderBy) orderBy = "1";
+    
+    const allItems = await findItemByTag({"tag" : { $in : [tag]}}).sort({[sort]: orderBy}).limit(limit);
 
     if(!allItems) return res.sendStatus(404);
 
