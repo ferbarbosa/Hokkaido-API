@@ -51,7 +51,7 @@ What do it have:
 * Create user.
 * Auth user.
 * Create a new item.
-* Get all items.
+* Get items by tag.
 * Get a single item by id.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
