@@ -3,7 +3,9 @@ import config from "config";
 
 
 function connect() {
-  const dbUri = config.get("dbUri") as string;
+  //const dbUri = config.get("dbUri") as string;
+
+  const dbUri = "mongodb://localhost:27017/hokkaido-api"
 
   return mongoose
     .connect(dbUri)
