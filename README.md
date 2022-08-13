@@ -48,6 +48,8 @@
 This is a API made for the HOKKAIDO STORE project.
 
 What do it have:
+* Create user.
+* Auth user.
 * Create a new item.
 * Get all items.
 * Get a single item by id.
