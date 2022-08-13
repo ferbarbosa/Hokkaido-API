@@ -8,8 +8,8 @@ import cors from "cors";
 //const port = config.get("port") as number;
 //const host = config.get("host") as string;
 const app = express();
-const port = Number(process.env.PORT) || 3000;
-const host = "0.0.0.0";
+const port = Number(process.env.PORT) || config.get("port") as number;
+const host = "0.0.0.0" || config.get("host") as string;
 
 
 //app.use(deserializeUser);
