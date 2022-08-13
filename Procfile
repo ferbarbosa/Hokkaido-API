@@ -1,1 +1,1 @@
-web: npm run dev
+web: ./node_modules/.bin/tsc --module commonjs --allowJs --outDir build/ --sourceMap --target es6 src/app.ts && node build/index.js
