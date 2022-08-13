@@ -5,8 +5,10 @@ import routes from "./routes";
 import cors from "cors";
 //import { deserializeUser } from "./middleware";
 
-const port = config.get("port") as number;
-const host = config.get("host") as string;
+//const port = config.get("port") as number;
+//const host = config.get("host") as string;
+const port = 3333;
+const host = "localhost";
 
 const app = express();
 //app.use(deserializeUser);
